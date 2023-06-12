@@ -109,7 +109,7 @@ y_2 = np.array(clf.predict_proba(X_test))
 
 y_filterd = []
 for y in y_2:
-    if (y[0] > threshold and y[1] < 1 - threshold) or (y[0] < 1 - threshold and y[1] > threshold):
+    if (y[0] > threshold and y[0] < 1 - threshold) and (y[1] > threshold and y[1] < 1 - threshold):
         y_filterd.append(y)
 # Evaluate the accuracy of the classifier
 accuracy = accuracy_score(y_test, y_pred)
