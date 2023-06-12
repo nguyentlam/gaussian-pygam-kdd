@@ -28,7 +28,7 @@ data_test = np.loadtxt('./KDDTest+.txt', dtype =object, delimiter=',', encoding=
 print('len(data_train)', len(data_train))
 print('len(data_test)', len(data_test))
 
-N = 100000
+threshold = 0.2
 X_train_raw = data_train[:, 0:41]
 y_train_raw = data_train[:, [41]]
 print('X_train_raw[0:3]===========', X_train_raw[0:3])
@@ -109,7 +109,7 @@ y_2 = np.array(clf.predict_proba(X_test))
 
 y_filterd = []
 for y in y_2:
-    if (y[0] > 0.2 and y[1] < 0.8) or (y[0] < 0.8 and y[1] > 0.2):
+    if (y[0] > threshold and y[1] < 1 - threshold) or (y[0] < 1 - threshold and y[1] > threshold):
         y_filterd.append(y)
 # Evaluate the accuracy of the classifier
 accuracy = accuracy_score(y_test, y_pred)
